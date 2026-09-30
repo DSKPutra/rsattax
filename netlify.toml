@@ -1,0 +1,15 @@
+# RSAttax — static site (no build step). Everything runs client-side via Pyodide.
+[build]
+  publish = "."
+  command = ""
+
+# COOP/COEP not required — Pyodide 0.26 runs without SharedArrayBuffer.
+[[headers]]
+  for = "/*.py"
+  [headers.values]
+    Content-Type = "text/x-python; charset=utf-8"
+
+[[headers]]
+  for = "/worker.js"
+  [headers.values]
+    Content-Type = "text/javascript; charset=utf-8"

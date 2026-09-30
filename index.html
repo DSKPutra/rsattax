@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>RSAttax — RSA Attack Suite</title>
+<meta name="description" content="RSAttax — suite serangan kriptanalisis RSA interaktif yang berjalan langsung di browser (Python/WebAssembly). 12 serangan RSA klasik oleh Dea Saka Kurnia Putra." />
+<meta property="og:title" content="RSAttax — RSA Attack Suite" />
+<meta property="og:description" content="12 serangan RSA klasik berjalan langsung di browser via WebAssembly. Fermat, Wiener, Håstad, Coppersmith, dan lainnya." />
+<meta property="og:type" content="website" />
+<link rel="icon" href="favicon.svg" type="image/svg+xml" />
+<link rel="preconnect" href="https://cdn.jsdelivr.net" />
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+<div class="bg-grid" aria-hidden="true"></div>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="logo">
+      <span class="lock">🔓</span>
+      <h1>RS<span class="accent">Attax</span></h1>
+    </div>
+    <p class="tagline">RSA Attack Suite — kriptanalisis RSA klasik berjalan <strong>langsung di browser</strong> lewat Python/WebAssembly. Tanpa server, tanpa kunci Anda meninggalkan perangkat.</p>
+    <div class="hero-meta">
+      <span class="pill" id="status-pill"><span class="dot loading"></span><span id="status-text">Memuat runtime WebAssembly…</span></span>
+      <span class="pill ghost">12 serangan</span>
+      <span class="pill ghost">Pure-Python · offline</span>
+    </div>
+    <div class="byline">oleh <strong>Dea Saka Kurnia Putra</strong> · Pelatihan Sertifikasi Cryptography Analyst — BSSN</div>
+  </div>
+</header>
+
+<main class="wrap">
+  <section class="control">
+    <label for="msg">Pesan rahasia (plaintext yang akan “disadap”)</label>
+    <div class="control-row">
+      <input id="msg" type="text" value="RSAttax" maxlength="40" spellcheck="false"
+             placeholder="ketik pesan pendek…" />
+      <button id="run-all" class="btn primary" disabled>▶ Jalankan semua</button>
+    </div>
+    <p class="hint">Setiap serangan membangun instance RSA yang <em>rentan</em> sesuai prasyaratnya, mengenkripsi pesan di atas, lalu memulihkannya hanya dari data publik — persis seperti penyerang.</p>
+  </section>
+
+  <section class="grid" id="grid"><!-- cards injected --></section>
+
+  <section class="iso">
+    <div class="iso-head">
+      <h2>🛡️ ISO/IEC Conformance Lab</h2>
+      <p>Kebalikan dari serangan: <strong>pengujian kesesuaian</strong> kunci publik terhadap standar. Bagian ini memetakan uji ke ISO/IEC 18032, 18033-2, 15946-1, dan 19790/24759.</p>
+    </div>
+
+    <div class="iso-panels">
+      <div class="iso-card">
+        <h3>Self-test standar</h3>
+        <p class="iso-sub">Miller-Rabin · validasi EC P-256 · SHA-256 KAT · validasi RSA + pairwise consistency.</p>
+        <button id="iso-run" class="btn primary" disabled>▶ Jalankan self-test</button>
+        <div id="iso-selftest-result" class="iso-result"></div>
+      </div>
+
+      <div class="iso-card">
+        <h3>Validasi kunci publik RSA</h3>
+        <p class="iso-sub">Tempel modulus <code>n</code> &amp; eksponen <code>e</code> (desimal atau <code>0x…</code> hex) — dicek terhadap ISO/IEC 18033-2.</p>
+        <label class="iso-label" for="iso-n">Modulus n</label>
+        <textarea id="iso-n" rows="3" spellcheck="false" placeholder="mis. 0x... atau angka desimal panjang"></textarea>
+        <label class="iso-label" for="iso-e">Eksponen e</label>
+        <input id="iso-e" type="text" value="65537" spellcheck="false" />
+        <button id="iso-validate" class="run" disabled>Validasi</button>
+        <div id="iso-validate-result" class="iso-result"></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="about">
+    <h2>Tentang RSAttax</h2>
+    <p>RSAttax mengemas toolkit kriptanalisis <code>rsakit.py</code> (LLL, Coppersmith/Howgrave-Graham, Miller-Rabin, CRT — <strong>pure-Python, tanpa dependensi</strong>) plus laboratorium pengujian kesesuaian <code>pkc_iso_lab.py</code> (ISO/IEC 18032, 18033-2, 15946-1, 19790/24759) menjadi satu laboratorium interaktif. Semua komputasi berjalan di dalam browser Anda memakai Pyodide (CPython dikompilasi ke WebAssembly); tidak ada data yang dikirim ke server mana pun.</p>
+    <p class="warn">⚠️ Dibuat untuk edukasi &amp; sertifikasi keamanan. Serangan hanya berhasil pada konfigurasi RSA yang salah/lemah — RSA yang diimplementasikan benar (kunci 2048-bit, padding OAEP, e=65537) tetap aman.</p>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>RSAttax · © 2026 Dea Saka Kurnia Putra</span>
+    <a id="repo-link" href="#" target="_blank" rel="noopener">Source di GitHub →</a>
+  </div>
+</footer>
+
+<script src="app.js"></script>
+</body>
+</html>
