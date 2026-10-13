@@ -4,3 +4,4 @@ __pycache__/
 .netlify/
 .vercel/
 node_modules/
+.vercel

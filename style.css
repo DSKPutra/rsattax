@@ -140,10 +140,24 @@ body{
   border-radius:10px;padding:14px 16px;font-size:14px}
 .about .warn strong{color:#fde68a}
 
-footer{border-top:1px solid var(--line);padding:26px 0;color:var(--muted);font-size:13.5px}
-footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px}
+footer{border-top:1px solid var(--line);padding:30px 0 40px;color:var(--muted);font-size:13.5px}
+footer .wrap{display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:20px}
 footer a{color:var(--accent);text-decoration:none;font-weight:600}
 footer a:hover{text-decoration:underline}
+.credit{display:flex;flex-direction:column;gap:9px}
+.credit-label{font-size:11px;font-weight:700;letter-spacing:1.4px;text-transform:uppercase;color:var(--muted)}
+.brand-card{display:inline-flex;align-items:center;background:#f4f4f5;border:1px solid #e4e4e7;border-radius:12px;
+  padding:14px 20px;width:fit-content;transition:transform .15s ease,box-shadow .15s ease}
+.brand-card:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(0,0,0,.35)}
+.brand-card img{height:46px;width:auto;display:block}
+.foot-meta{display:flex;flex-direction:column;align-items:flex-end;gap:8px;text-align:right}
+.copyright{color:var(--muted)}
+.copyright strong{color:var(--ink)}
+@media (max-width:560px){
+  footer .wrap{flex-direction:column;align-items:flex-start}
+  .foot-meta{align-items:flex-start;text-align:left}
+  .brand-card img{height:38px}
+}
 
 @media (max-width:560px){
   .hero{padding:44px 0 20px}
